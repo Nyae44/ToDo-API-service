@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/Nyae44/ToDo-API-service/internal/db"
+	"github.com/Nyae44/ToDo-API-service/internal/todo"
+	"github.com/Nyae44/ToDo-API-service/internal/transport"
 	"log"
-	"my-first-api/internal/db"
-	"my-first-api/internal/todo"
-	"my-first-api/internal/transport"
 )
 
 type TodoItem struct {

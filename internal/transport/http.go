@@ -3,8 +3,9 @@ package transport
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Nyae44/ToDo-API-service/internal/todo"
 	"log"
-	"my-first-api/internal/todo"
+
 	"net/http"
 )
 
