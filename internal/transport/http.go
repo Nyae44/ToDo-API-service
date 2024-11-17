@@ -2,6 +2,7 @@ package transport
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"my-first-api/internal/todo"
 	"net/http"
@@ -20,7 +21,14 @@ func NewServer(todoSvc *todo.Service) *Server {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /todo", func(w http.ResponseWriter, r *http.Request) {
-		b, err := json.Marshal(todoSvc.GetAll())
+		todoItems, err := todoSvc.GetAll()
+		if err != nil {
+			fmt.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		b, err := json.Marshal(todoItems)
 		if err != nil {
 			log.Println(err)
 		}
@@ -53,7 +61,12 @@ func NewServer(todoSvc *todo.Service) *Server {
 			writer.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		results := todoSvc.Search(query)
+		results, err := todoSvc.Search(query)
+		if err != nil {
+			fmt.Println(err.Error())
+			writer.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 		b, err := json.Marshal(results)
 		if err != nil {
 			writer.WriteHeader(http.StatusInternalServerError)
