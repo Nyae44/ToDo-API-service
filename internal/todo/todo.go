@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"my-first-api/internal/db"
+	"github.com/Nyae44/ToDo-API-service/internal/db"
 	"strings"
 )
 
