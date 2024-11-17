@@ -1,4 +1,4 @@
-module my-first-api
+module github.com/Nyae44/ToDo-API-service
 
 go 1.23
 
