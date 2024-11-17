@@ -13,11 +13,16 @@ type Item struct {
 	Status string
 }
 
-type Service struct {
-	db *db.DB
+type Manager interface {
+	InsertItem(ctx context.Context, item db.Item) error
+	GetAllItems(ctx context.Context) ([]db.Item, error)
 }
 
-func NewService(db *db.DB) *Service {
+type Service struct {
+	db Manager
+}
+
+func NewService(db Manager) *Service {
 	return &Service{
 		db: db,
 	}
